@@ -6,6 +6,8 @@ from collections import defaultdict, Counter
 import time, math
 
 from flatland.dir_SMAs import SMAs
+from flatland.envs.env_utils import get_move_from_to
+
 
 # >class
 class StrategyParams(object):
@@ -2167,7 +2169,7 @@ class ProbMap(PureStrategy):
         # last is the node right before goal
         node_xy, planned_move, plan = last, {}, 0
         while node_xy is not None:
-            planned_move[node_xy] = EnvUtils.get_move_from_to(node_xy, (x2, y2))
+            planned_move[node_xy] = get_move_from_to(node_xy, (x2, y2))
             x2, y2 = node_xy
             node_xy = parent.get(node_xy, None)
             plan += 1
@@ -2428,7 +2430,7 @@ def utils_find_a_path(
     node_xy, planned_move, plan = last, {}, 0
     child = {} # child map for printing the plan
     while node_xy is not None:
-        planned_move[node_xy] = EnvUtils.get_move_from_to(node_xy, (x2, y2))
+        planned_move[node_xy] = get_move_from_to(node_xy, (x2, y2))
         if node_xy is not None:
             child[node_xy] = (x2, y2)
         x2, y2 = node_xy
