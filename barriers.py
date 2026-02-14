@@ -3,25 +3,35 @@ import os
 import numpy as np
 import sys
 
-# Example run.
+# Example runs.
 #
-# Need to set the path, for example
+# Need to set the path appropriately, for example
 # export PYTHONPATH=$PYTHONPATH:/Users/...../dir_flatland_forage/git_flatland
 #
+# # NOTE: --sts  is strategies and specifies the strategies to use, in the given
+# # order. Below, we use strategies 2 (greedy) and 1 (random). (other strategies: 
+# # 3 is least visit-count, 4 is path, and 5 is probabilistic mapper/planner, 0 is oracle ).
 #
-# python3 barriers.py --size 15 --prop 0.2 --sts 1,2
+# 
+# python3.12 barriers.py --size 15 -outer 5 -days 20  --sts 2,1
+# 
+# mean and median number of steps to food (over the days/environments) are reported.
+#
+# '--sts 1'  would use strategy 1 only
+#
+# -grids displays the grids generated in text format.
+#
+# for more on options: 
+# python3.12 barriers.py -h
 #
 # One can inject noise into the agent motion
 # (-noise 0.03) and use path integration (-integ 1) to measure
-# (estimate) agent location (average results over 150 initial
-# environments, 50 days each, and -noh means do it in 'batch', ie
-# non-human display, mode).
+# (estimate) agent location (below: average results over 150 initial
+# environments, 50 days each).
 #
-# python3  barriers.py --size 15  -be --prop 0.3 -chr 0.0  -noise 0.03 -noh  -integ 1 \
-#  -ms 5500 -integ 1  -sts 3,4 -gprb 0.50   -fbr 0 -dsg 1  -days 50 -outer 150 | tail
+# python3  barriers.py --size 15  -be --prop 0.3 -chr 0.0  -noise 0.03  -integ 1 \
+#   -integ 1  -sts 5,3   -days 50 -outer 150 | tail
 #
-# use -atd when oracle agent is picked ( -atype 0 ) (also for smell-greedy, if you want it to use
-# on day 1)
 # 
 import time
 
@@ -38,8 +48,6 @@ from envs.barriers_env import BarriersEnv
 from envs.env_utils import get_env_with_a_path
 
 from agents.misc_agents_arxiv import CompositeAgent, StrategyParams
-
-# from agents.misc_agents import MiscAgents
 
 
 description = """Code for barrier experiments: python3 barriers.py -h  """
