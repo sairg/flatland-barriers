@@ -9,13 +9,14 @@ import sys
 # export PYTHONPATH=$PYTHONPATH:/Users/...../dir_flatland_forage/git_flatland
 #
 # # NOTE: --sts  is strategies and specifies the strategies to use, in the given
-# # order. Below, we use strategies 2 (greedy) and 1 (random). (other strategies: 
-# # 3 is least visit-count, 4 is path, and 5 is probabilistic mapper/planner, 0 is oracle ).
+# # order. In the example run below, we use strategies 2 (greedy) and 1 (random). (other strategies: 
+# # 3 is least visit-count, 4 is path, and 5 is probabilistic mapper/planner, 
+# 0 is oracle) (see the paper in the README for more details).
 #
 # 
 # python3.12 barriers.py --size 15 -outer 5 -days 20  --sts 2,1
 # 
-# mean and median number of steps to food (over the days/environments) are reported.
+# The output: mean and median number of steps to food (over the days/environments) are reported.
 #
 # '--sts 1'  would use strategy 1 only
 #
